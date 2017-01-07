@@ -4,7 +4,7 @@ defmodule Discuss.AuthController do
   plug Ueberauth
   alias Discuss.User
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     user_params = %{token: auth.credentials.token, email: auth.info.email, provider: to_string(auth.provider)}
     changeset = User.changeset(%User{}, user_params)
     signin(conn, changeset)
